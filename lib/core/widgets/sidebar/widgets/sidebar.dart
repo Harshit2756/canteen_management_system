@@ -1,3 +1,5 @@
+import 'package:canteen_app/app/data/services/auth/auth_service.dart';
+import 'package:canteen_app/core/utils/constants/enums/enums.dart';
 import 'package:flutter/material.dart';
 
 import '../../../routes/routes_name.dart';
@@ -11,6 +13,7 @@ class SideBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userRole = AuthService.instance.userRole;
     return SafeArea(
       child: Drawer(
         backgroundColor: HColors.sidebarColor,
@@ -59,16 +62,33 @@ class SideBar extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(height: 10),
-                  SideBarMenuItem(
-                    icon: HIcons.dashboardSidebar,
-                    title: HTexts.dashboard,
-                    route: HRoutesName.dashboard,
-                  ),
-                  SideBarMenuItem(
-                    icon: HIcons.employee,
-                    title: HTexts.employee,
-                    route: HRoutesName.employeeList,
-                  ),
+                  if (userRole != UserRole.EMPLOYEE) ...[
+                    SideBarMenuItem(
+                      icon: HIcons.dashboardSidebar,
+                      title: HTexts.dashboard,
+                      route: HRoutesName.dashboard,
+                    ),
+                    SideBarMenuItem(
+                      icon: HIcons.employee,
+                      title: HTexts.employee,
+                      route: HRoutesName.employeeList,
+                    ),
+                    SideBarMenuItem(
+                      icon: HIcons.plantSidebar,
+                      title: HTexts.plant,
+                      route: HRoutesName.plantList,
+                    ),
+                    SideBarMenuItem(
+                      icon: HIcons.membersSidebar,
+                      title: HTexts.members,
+                      route: HRoutesName.membersList,
+                    ),
+                    SideBarMenuItem(
+                      icon: HIcons.addMember,
+                      title: HTexts.addMember,
+                      route: HRoutesName.addMembers,
+                    ),
+                  ],
                   SideBarMenuItem(
                     icon: HIcons.mealMenu,
                     title: HTexts.mealsAction,
@@ -78,21 +98,6 @@ class SideBar extends StatelessWidget {
                     icon: HIcons.meal,
                     title: HTexts.mealsRequest,
                     route: HRoutesName.mealsRequestList,
-                  ),
-                  SideBarMenuItem(
-                    icon: HIcons.plantSidebar,
-                    title: HTexts.plant,
-                    route: HRoutesName.plantList,
-                  ),
-                  SideBarMenuItem(
-                    icon: HIcons.membersSidebar,
-                    title: HTexts.members,
-                    route: HRoutesName.membersList,
-                  ),
-                  SideBarMenuItem(
-                    icon: HIcons.addMember,
-                    title: HTexts.addMember,
-                    route: HRoutesName.addMembers,
                   ),
                   SideBarMenuItem(
                     icon: HIcons.reportsSidebar,

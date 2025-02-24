@@ -82,6 +82,8 @@ class AddEmployeesView extends StatelessWidget {
                 //* department field
                 CustomTextField(
                   type: TextFieldType.general,
+                  hintText: HTexts.department,
+                  labelText: HTexts.department,
                   focusNode: controller.departmentFocusNode,
                   controller: controller.departmentController,
                   toValidate: false,
@@ -96,6 +98,8 @@ class AddEmployeesView extends StatelessWidget {
                   type: TextFieldType.general,
                   focusNode: controller.designationFocusNode,
                   controller: controller.designationController,
+                  hintText: HTexts.designation,
+                  labelText: HTexts.designation,
                   toValidate: false,
                   onFieldSubmitted: (value) {
                     controller.designationFocusNode.unfocus();

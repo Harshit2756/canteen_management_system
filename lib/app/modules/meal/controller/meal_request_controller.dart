@@ -46,7 +46,8 @@ class MealRequestController extends GetxController implements PlantDataProvider,
       final Map<String, dynamic> meals = {
         "mealId": int.parse(selectedMealId.value),
         "quantity": int.parse(quantityController.text.trim()),
-        "plantId": int.parse(selectedPlantId.value),
+        // "plantId": int.parse(selectedPlantId.value),
+        "plantId": 2,
       };
       final response = await _mealsRequestRepository.addMealRequest(meals);
 

@@ -44,7 +44,7 @@ class DashboardBody extends StatelessWidget {
                     children: [
                       Expanded(
                         child: DashboardSummaryCard(
-                          title: 'Approved Visitor',
+                          title: 'Approved Request',
                           value: controller.summary.value.approvedVisitsCount.toString(),
                           icon: HIcons.approved,
                           color: Colors.lightGreen,
@@ -54,7 +54,7 @@ class DashboardBody extends StatelessWidget {
                       ),
                       Expanded(
                         child: DashboardSummaryCard(
-                          title: 'Pending Visitor',
+                          title: 'Pending Request',
                           value: controller.summary.value.pendingRequestCount.toString(),
                           icon: HIcons.pending,
                           color: Colors.orange.shade300,
@@ -65,7 +65,7 @@ class DashboardBody extends StatelessWidget {
                       ),
                       Expanded(
                         child: DashboardSummaryCard(
-                          title: 'Total Monthly Visitor',
+                          title: 'Total Monthly Request',
                           value: controller.summary.value.monthlyVisitsCount.toString(),
                           icon: HIcons.monthly,
                           color: Colors.lightBlue,
@@ -75,7 +75,7 @@ class DashboardBody extends StatelessWidget {
                       ),
                       Expanded(
                         child: DashboardSummaryCard(
-                          title: 'Today Visitor',
+                          title: 'Today Request',
                           value: controller.summary.value.todayVisitCount.toString(),
                           icon: HIcons.today,
                           color: Colors.red.shade300,
@@ -86,7 +86,7 @@ class DashboardBody extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: HSizes.md16),
-                  HHeaderText("Manage Today's Visitor"),
+                  HHeaderText("Todays Meals Requests"),
                   const SizedBox(height: HSizes.md16),
                   Expanded(
                     child: CustomDataTable(

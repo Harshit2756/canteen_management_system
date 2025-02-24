@@ -7,11 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/responsive/layouts/responsive_layout.dart';
+import '../../../../core/utils/constants/enums/enums.dart';
 import '../../../../core/utils/constants/extension/platform_extensions.dart';
 import '../../../../core/widgets/appbar/custom_appbar.dart';
 import '../../../../core/widgets/buttons/custom_button.dart';
 import '../../../../core/widgets/data_table/custom_data_table.dart';
 import '../../../../core/widgets/loading/shimmer/shimmer_list_view.dart';
+import '../../../data/services/auth/auth_service.dart';
 import '../controller/meals_menu_controller.dart';
 import 'table/meal_menu_table.dart';
 
@@ -76,16 +78,19 @@ class MealsMenuListView extends StatelessWidget {
   }
 
   Widget dataTable(MealsMenuController controller, BuildContext context) {
+    final userRole = AuthService.instance.userRole;
+
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: HSizes.md16),
         child: CustomDataTable(
+          minWidth: 200,
           searchController: controller.searchController,
           sortColumnIndex: controller.sortColumnIndex.value,
           sortAscending: controller.sortAscending.value,
           heading: Row(
             children: [
-              CustomButton(onPressed: controller.addMealsMenuView, text: HTexts.addMeals),
+              if (userRole != UserRole.EMPLOYEE) CustomButton(onPressed: controller.addMealsMenuView, text: HTexts.addMeals),
             ],
           ),
           columns: controller.columns.map((column) {

@@ -114,6 +114,8 @@ class HTexts {
   static const String membersList = "Members List";
   static const String hasAccess = "Has Access";
   static const String addMember = "Add Member";
+  static const String department = "Department";
+  static const String designation = "Designation";
 
   // -- employee View
   static const String employee = "Employee";
