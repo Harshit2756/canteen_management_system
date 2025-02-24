@@ -1,0 +1,84 @@
+name: Flutter Web Preview Build
+
+# PREREQUISITES:
+# 1. Create a new branch named 'live_preview'
+# 2. Configure GitHub Pages:
+#    - Go to Repository Settings > Pages
+#    - Select 'live_preview' branch as source
+#    - Set '/docs' as the publishing directory
+
+# WORKFLOW SETUP:
+# 1. Create this file at: .github/workflows/deploy_live_preview.yml
+# 2. Configure environment secrets:
+#    - Navigate to: Repository Settings > Secrets and Variables > Actions
+#    - Add New Repository Secrets:
+#      * API_KEY: Your API key value
+#      * CONTEXT_KEY: Your context key value
+
+# ACCESSING SECRETS:
+# - In GitHub Actions: ${{ secrets.SECRET_NAME }}
+# - In Windows CMD: %SECRET_NAME%
+# - In PowerShell: $env:SECRET_NAME
+
+on:
+  pull_request:
+    branches: [main, master]
+  push:
+    branches: [main, master]
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Reset live_preview branch to default branch
+        run: |
+          # Detect default branch (main or master)
+          DEFAULT_BRANCH=$(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
+          echo "Default branch is: $DEFAULT_BRANCH"
+
+          # Reset live_preview to detected default branch
+          git checkout live_preview 2>/dev/null || git checkout -b live_preview
+          git fetch origin $DEFAULT_BRANCH
+          git reset --hard origin/$DEFAULT_BRANCH
+          git push -f origin live_preview
+
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.29.0"
+          channel: "stable"
+
+      - name: Install dependencies
+        run: |
+          flutter clean
+          flutter pub get
+
+      - name: Build Web
+        run: flutter build web --base-href "/canteen_management_system/"
+      - name: Update docs directory
+        run: |
+          # Remove old docs and create new one
+          rm -rf docs
+          mkdir -p docs
+          # Copy web build to docs
+          cp -r build/web/. docs/
+
+      - name: Commit and push preview changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          # Stage all changes
+          git add docs lib/main.dart
+          git commit -m "Update web preview build" || echo "No changes to commit"
+          # Force push to ensure clean state
+          git push -f origin live_preview

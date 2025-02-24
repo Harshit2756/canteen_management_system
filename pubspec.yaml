@@ -1,0 +1,64 @@
+name: canteen_app
+description: "A new Flutter project."
+
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  #. media icons
+  shimmer: ^3.0.0
+  icons_plus: ^5.0.0
+
+  #. internationalization
+  intl: ^0.19.0
+
+  #. state management
+  get: ^4.6.6
+  get_storage: ^2.1.1
+
+  #. network
+  dio: ^5.7.0
+  connectivity_plus: ^6.1.1
+  jwt_decoder: ^2.0.1
+  json_annotation: ^4.9.0
+
+  #. permission handler
+  permission_handler: ^11.3.1
+
+  #. picker
+  image_picker: ^1.1.2
+  file_picker: ^8.1.4
+  cached_network_image: ^3.4.1
+  flutter_cached_pdfview: ^0.4.3
+
+  #. utils
+  logger: ^2.5.0
+  url_launcher: ^6.3.1
+  device_info_plus: ^11.2.1
+  path_provider: ^2.1.1
+  excel: ^4.0.6
+  open_file: ^3.5.9
+  data_table_2: ^2.5.15
+
+  # image: ^4.3.0
+  # crypto: ^3.0.6
+  # http: ^1.1.0
+  # http_parser: ^4.0.2
+  # http_auth: ^1.0.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.15
+  json_serializable: ^6.9.4
+
+flutter:
+  uses-material-design: true
