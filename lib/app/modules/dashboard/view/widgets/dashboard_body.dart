@@ -86,7 +86,7 @@ class DashboardBody extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: HSizes.md16),
-                  HHeaderText("Todays Meals Requests"),
+                  HHeaderText("Todays Meals Requests"),
                   const SizedBox(height: HSizes.md16),
                   Expanded(
                     child: CustomDataTable(
